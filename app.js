@@ -6,50 +6,52 @@ const PORT = process.env.PORT || 8080;
 
 // Configuration should use environment variables for sensitive data
 var config = {
-    user: process.env.DB_USER || "jcesula", // Database username   
-    password: process.env.DB_PASSWORD || "joel2001", // Database password
-    server: process.env.DB_SERVER || "localhost", // Server IP address
-    options: {
-        encrypt: false, // Disable encryption
-        port: process.env.DB_PORT || 1433, // Database port
-        database: process.env.DB_NAME || 'form_data',
-        instancename: process.env.DB_INSTANCE || 'SQLEXPRESS' // Instance name
+    "user": "jcesula", // Database username   
+    "password": "joel2001", // Database password
+    "server": "localhost", // Server IP address
+    "Port":"1433", // Database name
+    "options": {
+        "encrypt": false,
+        port: 56544,
+        database: 'form_data',
+        instancename: 'SQLEXPRESS' // Disable encryption
     }
-};
+}
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/public'));`
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(express.static(__dirname+"/public"))
 
-app.post("/", async (req, res) => {
-    const firstName = req.body.First_Name;
-    const lastName = req.body.Last_Name;
-    const emailaddress = req.body.Email;
-    
-    console.log(firstName, lastName, emailaddress);
-    
-    try {
-        await sql.connect(config);
+
+app.get("/",(req,res)=>{
+    res.sendFile(__dirname+"/public/index.html")
+
+})
+
+app.post("/",(req,res)=>{
+    const firstName = req.body.First_Name
+    const lastName = req.body.Last_Name
+    const emailaddress = req.body.Email
+    console.log(firstName)
+    console.log(lastName)
+    console.log(emailaddress)
+    sql.connect(config)
+    .then(() => {
         console.log('Connected to SQL Server');
-        
-        const request = new sql.Request();
+        let request = new sql.Request()
         request.input('firstName', sql.VarChar, firstName);
         request.input('lastName', sql.VarChar, lastName);
         request.input('emailAddress', sql.VarChar, emailaddress);
-        
-        await request.query(`INSERT INTO users (first_name, last_name, email_address) VALUES (@firstName, @lastName, @emailAddress)`);
-        
-        res.redirect("/success.html");
-    } catch (err) {
+        request.query(`INSERT INTO users (first_name, last_name, email_address) VALUES (@firstName, @lastName, @emailAddress)`,
+        );
+    })
+    .catch((err) => {
         console.error('Failed to connect to SQL Server:', err);
-        res.status(500).send('Server error');
-    }
 });
+    res.redirect("/success.html")
+})
 
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
-});
+app.listen(PORT, (req,res)=>{
+    console.log(`Listening to port ${PORT}`)
+})

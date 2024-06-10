@@ -1,7 +1,7 @@
 const express = require("express")
 const sql = require("mssql")
 const app = express()
-const PORT = process.env.PORT 5510
+const PORT = process.env.PORT || 5510
 
 var config = {
     "user": "jcesula", // Database username   

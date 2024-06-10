@@ -65,7 +65,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'form-data'
+          app-name: 'form-Data'
           slot-name: 'staging'
           package: .
           

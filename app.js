@@ -54,4 +54,5 @@ app.post("/",(req,res)=>{
 
 app.listen(PORT, (req,res)=>{
     console.log(`Listening to port ${PORT}`)
+    console.log("The console log is currently open to assess the code.")
 })

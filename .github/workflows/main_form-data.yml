@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - form-Data
+name: Build and deploy Node.js app to Azure Web App - form-data
 
 on:
   push:
@@ -21,10 +21,11 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install, build
+      - name: npm install, build, and test
         run: |
           npm install
           npm run build --if-present
+          npm run test --if-present
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
@@ -56,15 +57,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FC5034A4FCF6451CAF25A11CE972FA12 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_057B799A836A4C34ADF64665FB505C4E }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_76DD395C54A34F889A9C6B0499D7864B }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_DD60D365AE1E4AA8BAED10D9DAC347F1 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B6069A9F2CFA4EFAB4964AA32BBEE7C6 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5717C4A4729F47838FF9CB27027FF4EA }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'form-Data'
+          app-name: 'form-data'
           slot-name: 'Production'
           package: .
           

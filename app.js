@@ -10,7 +10,7 @@ var config = {
     "server": process.env.DB_SERVER, // Server IP address
     "database": 'SQL-data-form',
     "options": {
-        "encrypt": false,
+        "encrypt": true,
         trustServerCertificate: false // true for local dev/testing
     }
 }

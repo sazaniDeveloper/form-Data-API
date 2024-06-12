@@ -40,7 +40,7 @@ app.post("/",(req,res)=>{
         request.input('firstName', sql.VarChar, firstName);
         request.input('lastName', sql.VarChar, lastName);
         request.input('emailAddress', sql.VarChar, emailaddress);
-        request.query(`INSERT INTO [dbo].[users] (first_name, last_name, email_address) VALUES (@firstName, @lastName, @emailAddress)`,
+        request.query(`INSERT INTO dbo.users (first_name, last_name, email_address) VALUES (@firstName, @lastName, @emailAddress)`,
         );
     })
     .catch((err) => {

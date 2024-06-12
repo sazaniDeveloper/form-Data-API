@@ -4,18 +4,16 @@ const path = require("path");  // Add this line to import the path module
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// var config = {
-//     "user": "jcesula", // Database username   
-//     "password": "joel2001", // Database password
-//     "server": "localhost", // Server IP address
-//     "Port":"1433", // Database name
-//     "options": {
-//         "encrypt": false,
-//         port: 56544,
-//         database: 'form_data',
-//         instancename: 'SQLEXPRESS' // Disable encryption
-//     }
-// }
+var config = {
+    "user": process.env.DB_NAME, // Database username   
+    "password": process.env.DB_Password, // Database password
+    "server": process.env.DB_SERVER, // Server IP address
+    "database": 'SQL-data-form',
+    "options": {
+        "encrypt": false,
+        trustServerCertificate: false // true for local dev/testing
+    }
+}
 
 
 app.use(express.json())
@@ -35,19 +33,19 @@ app.post("/",(req,res)=>{
     console.log(firstName)
     console.log(lastName)
     console.log(emailaddress)
-//     sql.connect(config)
-//     .then(() => {
-//         console.log('Connected to SQL Server');
-//         let request = new sql.Request()
-//         request.input('firstName', sql.VarChar, firstName);
-//         request.input('lastName', sql.VarChar, lastName);
-//         request.input('emailAddress', sql.VarChar, emailaddress);
-//         request.query(`INSERT INTO users (first_name, last_name, email_address) VALUES (@firstName, @lastName, @emailAddress)`,
-//         );
-//     })
-//     .catch((err) => {
-//         console.error('Failed to connect to SQL Server:', err);
-// });
+    sql.connect(config)
+    .then(() => {
+        console.log('Connected to SQL Server');
+        let request = new sql.Request()
+        request.input('firstName', sql.VarChar, firstName);
+        request.input('lastName', sql.VarChar, lastName);
+        request.input('emailAddress', sql.VarChar, emailaddress);
+        request.query(`INSERT INTO users (first_name, last_name, email_address) VALUES (@firstName, @lastName, @emailAddress)`,
+        );
+    })
+    .catch((err) => {
+        console.error('Failed to connect to SQL Server:', err);
+});
     res.redirect("/success.html")
 })
 

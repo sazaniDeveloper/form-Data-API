@@ -4,7 +4,6 @@ const path = require("path");  // Add this line to import the path module
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-Configuration should use environment variables for sensitive data
 // var config = {
 //     "user": "jcesula", // Database username   
 //     "password": "joel2001", // Database password

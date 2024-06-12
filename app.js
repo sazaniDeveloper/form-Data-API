@@ -5,10 +5,10 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 var config = {
-    "user": process.env.DB_NAME, // Database username   
+    "user": "joeladmin", // Database username   
     "password": process.env.DB_Password, // Database password
     "server": process.env.DB_SERVER, // Server IP address
-    "database": 'SQL-data-form',
+    "database": process.env.DB_DATABASE,
     "options": {
         "encrypt": true,
         trustServerCertificate: false // true for local dev/testing

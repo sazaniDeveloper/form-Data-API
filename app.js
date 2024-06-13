@@ -8,7 +8,7 @@ var config = {
     user: "joeladmin", // Database username
     password: process.env.DB_Password, // Database password
     server: process.env.DB_SERVER, // Server IP address
-    database: process.env.DB_DATABASE,
+    database: "SQL-data-form",
     options: {
         encrypt: true,
         trustServerCertificate: false // true for local dev/testing

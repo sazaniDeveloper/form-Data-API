@@ -32,7 +32,7 @@ app.post("/", async (req, res) => {
     console.log(lastName);
     console.log(emailAddress);
 
-    console.log(config.database)
+    console.log(config)
 
     try {
         // Connect to the database

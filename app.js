@@ -40,7 +40,7 @@ app.post("/",(req,res)=>{
         request.input('firstName', sql.VarChar, firstName);
         request.input('lastName', sql.VarChar, lastName);
         request.input('emailAddress', sql.VarChar, emailaddress);
-        request.query(`SELECT * FROM [dbo].[users]`,
+        request.query('SELECT * FROM [dbo].[users]',
         );
     })
     .catch((err) => {

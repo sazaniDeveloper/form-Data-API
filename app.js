@@ -32,6 +32,8 @@ app.post("/", async (req, res) => {
     console.log(lastName);
     console.log(emailAddress);
 
+    console.log(config.database)
+
     try {
         // Connect to the database
         await sql.connect(config);
